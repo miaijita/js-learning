@@ -1,7 +1,12 @@
 const MatchMaker = require('./MatchMaker')
+const fs = require('fs')
 
 function main () {
-  MatchMaker.createPeopleAndMatch()
+  let matchObject = MatchMaker.createPeopleAndMatch()
+  matchObject = JSON.stringify(matchObject)
+  fs.writeFile('myjsonfile.json', matchObject, 'utf8', (err, result) => {
+    console.log('File Written')
+  })
 }
 
 main()
