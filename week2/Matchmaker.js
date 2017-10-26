@@ -1,15 +1,32 @@
 const Person = require('./Person')
 
+
+let matcObj = []
 function _makeFriendsWith(person1, person2) {
   person1.friends.push(person2);
   person2.friends.push(person1);
 }
 function _matchFriend(person1, person2) {
+  let ifMatched = false
   for (let interest of person1.interests) {
     if (person2.interests.includes(interest)) {
+      ifMatched = true
       _makeFriendsWith(person1, person2)
       console.log(`!MATCHED! ${person2.name} and ${person1.name} are potential lovers ♥ ♥ ♥`)
+      matcObj.push({
+        Person1: person1.name,
+        Person2: person2.name,
+        Result: 'Matched'
+      })
     }
+  }
+  if (!ifMatched) {
+    console.log(`!NOT MATCHED! ${person2.name} and ${person1.name} are not potential lovers`)
+    matcObj.push({
+      Person1: person1.name,
+      Person2: person2.name,
+      Result: 'Not Matched'
+    })
   }
 }
 
@@ -43,7 +60,7 @@ exports.createPeopleAndMatch = () => {
   _matchFriend(person7, person8)
   _matchFriend(person7, person9)
   _matchFriend(person7, person10)
-
+  return matcObj
 }
 
 function _printName(person) {
